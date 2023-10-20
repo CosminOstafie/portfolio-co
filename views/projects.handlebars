@@ -1,6 +1,12 @@
 <div id="main">
     <div class="container">
-        <h1>My projects</h1>
+        <div class="projects-wrapper">
+        <h1 class="projects-h1">My projects</h1>
+        {{#if isAdmin}}
+        <div>
+            <a class="new-project-btn" href="/projects/new" class="btn btn-link new-project-btn">Add New Project</a>
+        </div>
+        {{/if}}
         <div class="columns col-auto">
             {{#if dbError}}
                 <div>
@@ -9,7 +15,7 @@
                 </div>
             {{else}}
                 {{#each projects}}
-                    <div class="column col-4 col-md-6 col-sm-12">
+                    <div class="column col-4 col-md-12 col-sm-12 col-lg-6 col-xl-6">
                         <div class="card">
                             <div class="card-image">
                                 <img src="{{pimgURL}}" alt="{{pimgURL}}" class="img-responsive">
@@ -18,6 +24,13 @@
                                 <div class="card-title h3">{{pname}}</div>
                                 <div class="card-subtitle text-gray">{{pyear}} --- {{ptype}}</div>
                                 {{!-- <div class="card-subtitle text-gray">{{pdesc}}</div> --}}
+                            </div>
+                            <div class="card-footer">
+                                {{#if ../isAdmin}}
+                                <div>
+                                    <a href="/projects/update/{{pid}}">Modify</a> - <a href="/projects/delete/{{pid}}" class="important btn btn-error">Delete</a>
+                                </div>
+                                {{/if}}
                             </div>
                         </div>
                     </div>

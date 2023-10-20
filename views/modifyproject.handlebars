@@ -1,0 +1,35 @@
+<div class="main">
+    <div class="container">
+        <h1>Modify Project</h1>
+        <div class="modifyProject-wrapper">
+            {{#if isLoggedIn}}
+                {{#if isAdmin}}
+                    <form action="/projects/update/{{project.pid}}" method="post">
+                    <fieldset>
+                    <label for="projectName">Project name</label>
+                    <input type="text" name="projectName" id="projectName" value="{{project.pname}}" required="required">
+                    <br/>
+                    <label for="projectType">Project type: </label>
+                    <input type="text" name="projectType" id="projectType" value="{{project.ptype}}" required="required">
+                    <br/>
+                    <label for="projectDesc">Project description: </label>
+                    <textarea name="projectDesc" id="projectDesc" required="required" cols="30" rows="5"  placeholder="Add a description">{{project.pdesc}}</textarea>
+                    <br/>
+                    <label for="projectYear">Project year: </label>
+                    <input type="number" name="projectYear" id="projectYear" placeholder="2023" value="{{project.pyear}}" required="required">
+                    <br/>
+                    <label for="projectImg">Project Image URL: </label>
+                    <input type="text" name="projectImg" id="projectImg" value="{{project.pimgURL}}" required="required" placeholder="/img/...">
+                </fieldset>
+                <input type="submit" value="Update project">
+                    </form>
+                {{else}}
+                    <p>Sorry, you must be an administrator to modify a project</p>
+                {{/if}}
+            {{else}}
+                <p>You must be logged in to modify a project. <br/>
+                <a href="/login">Log in</a> and try again.</p>
+            {{/if}}
+        </div>
+    </div>
+</div>

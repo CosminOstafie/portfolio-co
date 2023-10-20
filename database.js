@@ -1,3 +1,4 @@
+const { hash } = require('bcrypt');
 const sqlite3 = require('sqlite3');
 
 const db = new sqlite3.Database('./database.db', (err)=>{
@@ -68,11 +69,29 @@ const db = new sqlite3.Database('./database.db', (err)=>{
                 })
             })
 
+            db.run(`CREATE TABLE IF NOT EXISTS users(
+                uid INTEGER PRIMARY KEY,
+                uname TEXT NOT NULL UNIQUE,
+                uhash TEXT NOT NULL,
+                uadmin INTEGER NOT NULL
+            )`, (err)=>{
+                if(err){
+                    console.error("ERROR: ",err.message)
+                }else{
+                    console.log("----Table users succesfully created----")
+                }
+            })
 
+            // db.run("INSERT INTO users (uname,uhash,uadmin) VALUES (?,?,?)",["cosmin",$2b$12$q6vAztzHCCDqrZpky1AGPukixVE5mB2ACiFLn8NDO3zRfwOaLDH3y,1],(err)=>{
+            //     if(err){
+            //         console.error("ERROR inserting user: ",err.message)
+            //     } else{
+            //         console.log("---User added succesfully----")
+            //     }
+            // })
 
+            
 
-
-        
     }
 });
 

@@ -1,0 +1,36 @@
+<div class="main">
+    <div class="container-newproject container">
+        <div class="new-project-wrapper">
+            <h1>New Project</h1>
+        {{#if isLoggedIn}}
+            {{#if isAdmin}}
+                <form action="/projects/new" method="POST">
+                <fieldset>
+                    <label for="projectName">Project name</label>
+                    <input type="text" name="projectName" id="projectName" required="required">
+                    <br/>
+                    <label for="projectType">Project type: </label>
+                    <input type="text" name="projectType" id="projectType" required="required">
+                    <br/>
+                    <label for="projectDesc">Project description: </label>
+                    <textarea name="projectDesc" id="projectDesc" required="required" cols="30" rows="5" placeholder="Add a description"></textarea>
+                    <br/>
+                    <label for="projectYear">Project year: </label>
+                    <input type="number" name="projectYear" id="projectYear" placeholder="2023" required="required">
+                    <br/>
+                    <label for="projectImg">Project Image URL: </label>
+                    <input type="text" name="projectImg" id="projectImg" required="required" placeholder="/img/...">
+                </fieldset>
+                <input type="submit" class="add-project-btn" value="Add project">
+                </form>
+            {{else}}
+            <p>Sorry, you must be an administrator to add a new project.</p>
+            {{/if}}
+        {{else}}
+            <p>Sorry, you must be logged in to add a new project. <br/>
+            <a href="/login">Log in</a> and try again.
+            </p>
+        {{/if}}
+        </div>
+    </div>
+</div>
