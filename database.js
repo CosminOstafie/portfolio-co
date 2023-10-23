@@ -82,6 +82,9 @@ const db = new sqlite3.Database('./database.db', (err)=>{
                 }
             })
 
+        
+
+            
             // db.run("INSERT INTO users (uname,uhash,uadmin) VALUES (?,?,?)",["cosmin",$2b$12$q6vAztzHCCDqrZpky1AGPukixVE5mB2ACiFLn8NDO3zRfwOaLDH3y,1],(err)=>{
             //     if(err){
             //         console.error("ERROR inserting user: ",err.message)
@@ -90,8 +93,46 @@ const db = new sqlite3.Database('./database.db', (err)=>{
             //     }
             // })
 
-            
+            // db.run(`DROP TABLE education`,(err)=>{
+            //     if(err){
+            //         console.error("ERROR deleting table:",err.message)
+            //     }else{
+            //         console.log("deleted education")
+            //     }
+            // })
 
+            db.run(`CREATE TABLE IF NOT EXISTS education(
+                eid INTEGER PRIMARY KEY,
+                ename TEXT NOT NULL,
+                etype TEXT NOT NULL,
+                eperiod TEXT NOT NULL,
+                elocation TEXT NOT NULL
+            )`, (err)=>{
+                if(err){
+                    console.error("ERROR: ",err.message)
+                }else{
+                    console.log("-----Table education created succesfully------")
+                }
+            })
+            
+            const education = [
+                {"eid":"1","ename":"Middle School No.3 Suceava","etype":"Elementary School","eperiod":"2008-2011","elocation":"Romania"},
+                {"eid":"2","ename":"Middle School No.3 Suceava","etype":"Middle School","eperiod":"2011-2016","elocation":"Romania"},
+                {"eid":"3","ename":"'Petru Rares' National College of Suceava","etype":"High School","eperiod":"2016-2020","elocation":"Romania"},
+                {"eid":"4","ename":"'Stefan cel Mare' University of Suceava","etype":"University","eperiod":"2020-2021","elocation":"Romania"},
+                {"eid":"5","ename":"Jönköping University","etype":"University","eperiod":"2022-2025","elocation":"Sweden"}
+            ]
+
+            education.forEach((school)=>{
+                db.run(`INSERT INTO education (eid,ename,etype,eperiod,elocation) VALUES (?,?,?,?,?)`,[school.eid,school.ename,school.etype,school.eperiod,school.elocation], (err)=>{
+                    if(err){
+                        console.error("ERROR: ",err.message)
+                    } else{
+                        console.log("--Line added to the education table--")
+                    }
+                })
+            })
+            
     }
 });
 

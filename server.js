@@ -117,7 +117,7 @@ app.post('/login',(req,res)=>{
                     req.session.isAdmin = false;
                     req.session.isLoggedIn = false;
                     req.session.name = "";
-                    res.redirect('/');
+                    res.redirect('/login');
                 }
             })
         }
@@ -179,12 +179,29 @@ app.get('/skills',(req,res)=>{
 
 app.get('/about',(req,res)=>{
     console.log('SESSION: ', req.session);
-    const model = {
+    db.all("SELECT * FROM education",(error,theSchools)=>{
+        if(error){
+        const model = {
+        dbError: true,
+        theError: error,
+        schools: [],
         "isAdmin": req.session.isAdmin,
         "isLoggedIn" : req.session.isLoggedIn,
         "name": req.session.name
-    };
-    res.render('about.handlebars', model);
+    };  
+        res.render('about.handlebars', model);
+        } else{
+            const model = {
+                dbError: false,
+                theError: "",
+                schools: theSchools,
+                "isAdmin": req.session.isAdmin,
+                "isLoggedIn" : req.session.isLoggedIn,
+                "name": req.session.name
+            };  
+                res.render('about.handlebars', model);
+        }
+    }) 
 })
 
 app.get('/login',(req,res)=>{
@@ -221,7 +238,7 @@ app.get('/projects', (req, res) => {
             // renders the page with the model
             res.render("projects.handlebars", model)
         }
-      })
+    })
 });
 
 //Delete project route

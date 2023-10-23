@@ -1,7 +1,42 @@
 <div class="main">
     <div class="container">
-        <div class="about-wrapper">
+        
+        <div class="about-container">
         <h1>About me</h1>
+        <div class="about-wrapper">
+        <p>Web developer in the making, with a passion for crafting digital experiences. I find inspiration in the art of web development, where creativity meets functionality. My journey is fueled by the desire to turn ideas into digital realities. My goal is to create web experiences that captivate and connect people.</p>
+        </div> 
+    </div>
+        <div class="education-container">
+            <h1>Education</h1>
+            <div class="columns col-auto">
+            {{#if dbError}}
+            <div>Sorry, There was a problem with the database: <br>
+            {{theError}}.</div>
+            {{else}}
+            {{#each schools}}   
+            <div class="column col-6 col-md-12 col-sm-12 col-lg-12 col-xl-12">
+            <div class="tile">
+                <div class="tile-content">
+                    <p class="tile-title">{{ename}}</p>
+                    <p class="tile-subtitle">{{etype}} --- {{eperiod}} <br>
+                    {{elocation}}</p>
+                </div>
+            </div>
+            </div>
+            {{/each}}
+            {{/if}}
+            </div>
         </div>
+        <div class="contact-container">
+            <h1>Contact Details</h1>
+            <div class="contact-wrapper">
+                <p>The door is open for collaboration and discussion. If you have ideas, questions, or projects in mind, I'm eager to hear from you. Contact me anytime.</p>
+                <p class="color">Email:</p> <p>cosminoa@yahoo.com</p>
+                <p class="color">Whatsapp:</p><p> 0707070707</p>
+                
+            </div>
+        </div>
+    
     </div>
 </div>
